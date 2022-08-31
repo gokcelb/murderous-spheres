@@ -17,6 +17,11 @@ public class SpawnManager : MonoBehaviour
 
     private const float verticalPos = 3.0f;
 
+    private const float overlapCheckRadius = 2.5f;
+    private const int maxSpawnAttempts = 10;
+    private const int maxFailedSpawnAttempts = 10;
+    private int failedSpawnAttempts = 0;
+
     private const float horizontalRange = 15.0f;
     private const float topRange = 20.0f;
     private const float bottomRange = 0.0f;
@@ -36,26 +41,62 @@ public class SpawnManager : MonoBehaviour
 
     void Spawn()
     {
-        float x = Random.Range(-horizontalRange, horizontalRange);
-        float z = Random.Range(bottomRange, topRange);
-        Vector3 pos = new Vector3(x, verticalPos, z);
+        var posInfo = GetSpawnPositionInfo();
+        Vector3 pos = posInfo.Item1;
+        bool valid = posInfo.Item2;
 
-        int phase = CalculatePhase();
-        if (phase == 1)
+        if (valid)
         {
-            int i = Random.Range(0, enemiesFirstPhase.Length - 1);
-            Instantiate(enemiesFirstPhase[i], pos, enemiesFirstPhase[i].transform.rotation);
-        }
-        else if (phase == 2)
-        {
-            int i = Random.Range(0, enemiesSecondPhase.Length - 1);
-            Instantiate(enemiesSecondPhase[i], pos, enemiesSecondPhase[i].transform.rotation);
+            int phase = CalculatePhase();
+            if (phase == 1)
+            {
+                int i = Random.Range(0, enemiesFirstPhase.Length - 1);
+                Instantiate(enemiesFirstPhase[i], pos, enemiesFirstPhase[i].transform.rotation);
+            }
+            else if (phase == 2)
+            {
+                int i = Random.Range(0, enemiesSecondPhase.Length - 1);
+                Instantiate(enemiesSecondPhase[i], pos, enemiesSecondPhase[i].transform.rotation);
+            }
+            else
+            {
+                int i = Random.Range(0, enemiesThirdPhase.Length - 1);
+                Instantiate(enemiesThirdPhase[i], pos, enemiesThirdPhase[i].transform.rotation);
+            }
         }
         else
         {
-            int i = Random.Range(0, enemiesThirdPhase.Length - 1);
-            Instantiate(enemiesThirdPhase[i], pos, enemiesThirdPhase[i].transform.rotation);
+            failedSpawnAttempts++;
         }
+
+        if (failedSpawnAttempts == maxFailedSpawnAttempts)
+        {
+            CancelInvoke("Spawn");
+        }
+    }
+
+    (Vector3, bool) GetSpawnPositionInfo()
+    {
+        Vector3 pos = Vector3.zero;
+        int spawnAttempts = 0;
+        bool valid = false;
+
+        while (!valid && spawnAttempts < maxSpawnAttempts)
+        {
+            float x = Random.Range(-horizontalRange, horizontalRange);
+            float z = Random.Range(bottomRange, topRange);
+            pos = new Vector3(x, verticalPos, z);
+            spawnAttempts++;
+
+            Collider[] hitColliders = Physics.OverlapSphere(pos, overlapCheckRadius);
+
+            if (hitColliders.Length == 0)
+            {
+                valid = true;
+            }
+        }
+
+        return (pos, valid);
     }
 
     int CalculatePhase()
