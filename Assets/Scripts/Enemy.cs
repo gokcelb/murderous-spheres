@@ -6,17 +6,11 @@ public class Enemy : MonoBehaviour
 {
     public GameObject projectile;
 
-    private float creationTime;
     private const float shootingInterval = 1f;
-
-    private void Awake()
-    {
-        creationTime = Time.time;
-    }
 
     void Start()
     {
-        InvokeRepeating("CreateProjectile", creationTime, shootingInterval);
+        InvokeRepeating("CreateProjectile", Time.time, shootingInterval);
     }
 
     void CreateProjectile()
