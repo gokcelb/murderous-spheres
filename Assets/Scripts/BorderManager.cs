@@ -8,13 +8,6 @@ public class BorderManager : MonoBehaviour
     private const float bottomBorder = -30.0f;
     private const float topBorder = 20.0f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if (transform.position.z <= bottomBorder)

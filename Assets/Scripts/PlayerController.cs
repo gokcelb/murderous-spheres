@@ -4,24 +4,25 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public const float speed = 15.0f;
+    public GameObject projectile;
+
+    private const float speed = 15.0f;
 
     private float horizontalInput;
     private float verticalInput;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            // create a projectile
+            Instantiate(projectile, transform.position, projectile.transform.rotation);
+        }
+
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
 
-        transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
-        transform.Translate(Vector3.forward * verticalInput * Time.deltaTime * speed);
+        transform.Translate(horizontalInput * speed * Time.deltaTime * Vector3.right);
+        transform.Translate(speed * Time.deltaTime * verticalInput * Vector3.forward);
     }
 }

@@ -26,17 +26,10 @@ public class SpawnManager : MonoBehaviour
     private const float topRange = 20.0f;
     private const float bottomRange = 0.0f;
 
-    // Start is called before the first frame update
     void Start()
     {
         initTime = Time.time;
         InvokeRepeating("Spawn", start, interval);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     void Spawn()
@@ -47,22 +40,7 @@ public class SpawnManager : MonoBehaviour
 
         if (valid)
         {
-            int phase = CalculatePhase();
-            if (phase == 1)
-            {
-                int i = Random.Range(0, enemiesFirstPhase.Length - 1);
-                Instantiate(enemiesFirstPhase[i], pos, enemiesFirstPhase[i].transform.rotation);
-            }
-            else if (phase == 2)
-            {
-                int i = Random.Range(0, enemiesSecondPhase.Length - 1);
-                Instantiate(enemiesSecondPhase[i], pos, enemiesSecondPhase[i].transform.rotation);
-            }
-            else
-            {
-                int i = Random.Range(0, enemiesThirdPhase.Length - 1);
-                Instantiate(enemiesThirdPhase[i], pos, enemiesThirdPhase[i].transform.rotation);
-            }
+            SpawnByPhase(pos);
         }
         else
         {
@@ -99,7 +77,7 @@ public class SpawnManager : MonoBehaviour
         return (pos, valid);
     }
 
-    int CalculatePhase()
+    void SpawnByPhase(Vector3 pos)
     {
         float currentTime = Time.time;
         float secondPhaseStart = initTime + firstPhaseDuration;
@@ -107,15 +85,18 @@ public class SpawnManager : MonoBehaviour
 
         if (currentTime < secondPhaseStart)
         {
-            return 1;
+            int i = Random.Range(0, enemiesFirstPhase.Length - 1);
+            Instantiate(enemiesFirstPhase[i], pos, enemiesFirstPhase[i].transform.rotation);
         }
         else if (currentTime >= secondPhaseStart && currentTime < thirdPhaseStart)
         {
-            return 2;
+            int i = Random.Range(0, enemiesSecondPhase.Length - 1);
+            Instantiate(enemiesSecondPhase[i], pos, enemiesSecondPhase[i].transform.rotation);
         }
         else
         {
-            return 3;
+            int i = Random.Range(0, enemiesThirdPhase.Length - 1);
+            Instantiate(enemiesThirdPhase[i], pos, enemiesThirdPhase[i].transform.rotation);
         }
     }
 }
