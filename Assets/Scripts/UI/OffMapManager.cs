@@ -7,7 +7,7 @@ public class OffMapManager : MonoBehaviour
     private const float horizontalBorder = 30f;
     private const float verticalBorder = 40f;
 
-    void Update()
+    private void Update()
     {
         bool offMapHorizontal = transform.position.x >= horizontalBorder || transform.position.x <= -horizontalBorder;
         bool offMapVertical = transform.position.z >= verticalBorder || transform.position.z <= -verticalBorder;

@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 5032208099897633088}
   - component: {fileID: 2145684935907072369}
   - component: {fileID: 6840616341763802405}
-  - component: {fileID: -8202831396949768087}
   - component: {fileID: -3928075172652670492}
+  - component: {fileID: 8622887142967409525}
   m_Layer: 0
   m_Name: EnemyHard
   m_TagString: Enemy
@@ -85,19 +85,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-8202831396949768087
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 697571848078583901}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1a465bf48e9df46ed8914f21a733539f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectile: {fileID: 1437350307038301448, guid: d1a2bb171625c43a8988453d02d047c8, type: 3}
 --- !u!135 &-3928075172652670492
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -111,3 +98,16 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8622887142967409525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 697571848078583901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1cf58b8bf73e44e6a35e068de477a86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 1437350307038301448, guid: d1a2bb171625c43a8988453d02d047c8, type: 3}

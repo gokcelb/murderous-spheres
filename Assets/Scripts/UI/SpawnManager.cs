@@ -26,13 +26,13 @@ public class SpawnManager : MonoBehaviour
     private const float topRange = 20.0f;
     private const float bottomRange = 0.0f;
 
-    void Start()
+    private void Start()
     {
         initTime = Time.time;
         InvokeRepeating("Spawn", start, interval);
     }
 
-    void Spawn()
+    private void Spawn()
     {
         var posInfo = GetSpawnPositionInfo();
         Vector3 pos = posInfo.Item1;
@@ -53,7 +53,7 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    (Vector3, bool) GetSpawnPositionInfo()
+    private (Vector3, bool) GetSpawnPositionInfo()
     {
         Vector3 pos = Vector3.zero;
         int spawnAttempts = 0;
@@ -77,7 +77,7 @@ public class SpawnManager : MonoBehaviour
         return (pos, valid);
     }
 
-    void SpawnByPhase(Vector3 pos)
+    private void SpawnByPhase(Vector3 pos)
     {
         float currentTime = Time.time;
         float secondPhaseStart = initTime + firstPhaseDuration;

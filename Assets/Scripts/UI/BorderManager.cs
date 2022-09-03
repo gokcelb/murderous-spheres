@@ -8,7 +8,7 @@ public class BorderManager : MonoBehaviour
     private const float bottomBorder = -30.0f;
     private const float topBorder = 20.0f;
 
-    void Update()
+    private void Update()
     {
         if (transform.position.z <= bottomBorder)
         {

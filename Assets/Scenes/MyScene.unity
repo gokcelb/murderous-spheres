@@ -134,13 +134,11 @@ GameObject:
   - component: {fileID: 150413993}
   - component: {fileID: 150413992}
   - component: {fileID: 150413991}
-  - component: {fileID: 150413994}
-  - component: {fileID: 150413995}
   - component: {fileID: 150413996}
   - component: {fileID: 150413997}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -210,31 +208,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &150413994
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 150413989}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3e88f42fa25d649f99cc617806954678, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectile: {fileID: 1437350307038301448, guid: 3a539068a1646485c860591730c605dd, type: 3}
---- !u!114 &150413995
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 150413989}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c384db57b6984f22a43382aef30bffd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!135 &150413996
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -303,6 +276,10 @@ MonoBehaviour:
   - {fileID: 8338940500265154174, guid: f9a6d03a6bd37486e8297aa111339801, type: 3}
   - {fileID: 697571848078583901, guid: 3880f57bf2cf94ae69cebfa581404913, type: 3}
   - {fileID: 697571848078583901, guid: 3880f57bf2cf94ae69cebfa581404913, type: 3}
+  initTime: 0
+  firstPhaseDuration: 5
+  secondPhaseDuration: 10
+  failedSpawnAttempts: 0
 --- !u!4 &263405308
 Transform:
   m_ObjectHideFlags: 0
