@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
 
     private float GetProjectileDamage(GameObject otherGameObject)
     {
-        Projectile projectileScript = otherGameObject.GetComponent("Projectile") as Projectile;
+        Projectile projectileScript = otherGameObject.GetComponent(typeof(Projectile)) as Projectile;
         return projectileScript.GetDamage();
     }
 }
