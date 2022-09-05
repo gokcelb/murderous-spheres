@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
 {
     public GameObject projectile;
     private Models.Enemy model;
+    private const float shootingStart = 1f;
 
     private void Awake()
     {
@@ -15,7 +16,7 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        InvokeRepeating("CreateProjectile", Time.time, model.ShootingSpeed);
+        InvokeRepeating("CreateProjectile", shootingStart, model.ShootingSpeed);
     }
 
     private void Update()
