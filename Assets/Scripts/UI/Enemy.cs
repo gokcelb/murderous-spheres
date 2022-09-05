@@ -24,6 +24,7 @@ public class Enemy : MonoBehaviour
         if (model.Health <= 0)
         {
             Destroy(gameObject);
+            Models.Score.IncreaseKillByDifficulty(GetDifficulty());
         }
     }
 
@@ -43,13 +44,24 @@ public class Enemy : MonoBehaviour
 
     private Models.Enemy InstantiateModel()
     {
-        Models.Enemy enemy = PrefabUtility.GetOriginalPrefabName(gameObject.name) switch
+        Models.Enemy enemy = GetDifficulty() switch
         {
-            "EnemyEasy" => new Factories.EnemyEasy().Create(),
-            "EnemyHard" => new Factories.EnemyHard().Create(),
-            _ => new Factories.EnemyNormal().Create(),
+            Models.EnemyDifficulty.Easy => new Factories.EnemyEasy().Create(),
+            Models.EnemyDifficulty.Normal => new Factories.EnemyNormal().Create(),
+            _ => new Factories.EnemyHard().Create(),
         };
         return enemy;
+    }
+
+    private Models.EnemyDifficulty GetDifficulty()
+    {
+        Models.EnemyDifficulty difficulty = PrefabUtility.GetOriginalPrefabName(gameObject.name) switch
+        {
+            "EnemyEasy" => Models.EnemyDifficulty.Easy,
+            "EnemyNormal" => Models.EnemyDifficulty.Normal,
+            _ => Models.EnemyDifficulty.Hard,
+        };
+        return difficulty;
     }
 
     private float GetProjectileDamage(GameObject otherGameObject)
