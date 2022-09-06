@@ -15,6 +15,11 @@ namespace Models
         {
 			Health -= damage;
         }
+
+		public void Heal(float heal)
+        {
+			Health += heal;
+        }
 	}
 }
 

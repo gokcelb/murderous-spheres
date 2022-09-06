@@ -7,66 +7,91 @@ public class SpawnManager : MonoBehaviour
     public GameObject[] enemiesFirstPhase; // three easy, one normal
     public GameObject[] enemiesSecondPhase; // one easy, two normal, one hard
     public GameObject[] enemiesThirdPhase; // one normal, two hard
-
-    private const float start = 1.0f;
-    private const float interval = 2.0f;
+    public GameObject healthPotion;
 
     private float initTime;
-    private float firstPhaseDuration = 5.0f;
-    private float secondPhaseDuration = 10.0f;
 
-    private const float verticalPos = 3.0f;
-
-    private const float overlapCheckRadius = 2.5f;
-    private const int maxSpawnAttempts = 10;
-    private const int maxFailedSpawnAttempts = 10;
-    private int failedSpawnAttempts = 0;
-
-    private const float horizontalRange = 15.0f;
-    private const float topRange = 20.0f;
-    private const float bottomRange = 0.0f;
+    Models.EnemySpawner enemySpawner;
+    Models.HealthPotionSpawner healthPotionSpawner;
 
     private void Start()
     {
         initTime = Time.time;
-        InvokeRepeating("Spawn", start, interval);
+
+        enemySpawner = new Models.EnemySpawner();
+        InvokeRepeating(
+            "SpawnEnemy",
+            enemySpawner.spawnStart,
+            enemySpawner.spawnInterval
+        );
+
+        healthPotionSpawner = new Models.HealthPotionSpawner();
+        InvokeRepeating(
+            "SpawnHealthPotion",
+            healthPotionSpawner.spawnStart,
+            healthPotionSpawner.spawnInterval
+        );
     }
 
-    private void Spawn()
+    private void SpawnEnemy()
     {
-        var posInfo = GetSpawnPositionInfo();
+        var posInfo = GetSpawnPositionInfo(enemySpawner);
         Vector3 pos = posInfo.Item1;
         bool valid = posInfo.Item2;
 
         if (valid)
         {
-            SpawnByPhase(pos);
+            SpawnEnemyByPhase(pos);
         }
         else
         {
-            failedSpawnAttempts++;
+            enemySpawner.failedSpawnAttempts++;
         }
 
-        if (failedSpawnAttempts == maxFailedSpawnAttempts)
+        if (enemySpawner.failedSpawnAttempts == enemySpawner.maxFailedSpawnAttempts)
         {
-            CancelInvoke("Spawn");
+            CancelInvoke("SpawnEnemy");
         }
     }
 
-    private (Vector3, bool) GetSpawnPositionInfo()
+    private void SpawnHealthPotion()
+    {
+        var posInfo = GetSpawnPositionInfo(healthPotionSpawner);
+        Vector3 pos = posInfo.Item1;
+        bool valid = posInfo.Item2;
+
+        if (valid)
+        {
+            Instantiate(healthPotion, pos, healthPotion.transform.rotation);
+        }
+        else
+        {
+            healthPotionSpawner.failedSpawnAttempts++;
+        }
+
+        if (healthPotionSpawner.failedSpawnAttempts == healthPotionSpawner.maxFailedSpawnAttempts)
+        {
+            CancelInvoke("SpawnHealthPotion");
+        }
+    }
+
+    private (Vector3, bool) GetSpawnPositionInfo(Models.Spawner spawner)
     {
         Vector3 pos = Vector3.zero;
         int spawnAttempts = 0;
         bool valid = false;
 
-        while (!valid && spawnAttempts < maxSpawnAttempts)
+        while (!valid && spawnAttempts < spawner.maxSpawnAttempts)
         {
-            float x = Random.Range(-horizontalRange, horizontalRange);
-            float z = Random.Range(bottomRange, topRange);
-            pos = new Vector3(x, verticalPos, z);
+            float x = Random.Range(spawner.bottomRange, spawner.topRange);
+            float z = Random.Range(spawner.bottomRange, spawner.topRange);
+            pos = new Vector3(x, spawner.fixedVerticalPos, z);
             spawnAttempts++;
 
-            Collider[] hitColliders = Physics.OverlapSphere(pos, overlapCheckRadius);
+            Collider[] hitColliders = Physics.OverlapSphere(
+                pos,
+                spawner.overlapCheckRadius
+            );
 
             if (hitColliders.Length == 0)
             {
@@ -77,11 +102,11 @@ public class SpawnManager : MonoBehaviour
         return (pos, valid);
     }
 
-    private void SpawnByPhase(Vector3 pos)
+    private void SpawnEnemyByPhase(Vector3 pos)
     {
         float currentTime = Time.time;
-        float secondPhaseStart = initTime + firstPhaseDuration;
-        float thirdPhaseStart = initTime + firstPhaseDuration + secondPhaseDuration;
+        float secondPhaseStart = initTime + enemySpawner.firstPhaseDuration;
+        float thirdPhaseStart = initTime + enemySpawner.firstPhaseDuration + enemySpawner.secondPhaseDuration;
 
         if (currentTime < secondPhaseStart)
         {

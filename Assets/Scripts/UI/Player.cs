@@ -32,12 +32,26 @@ public class Player : MonoBehaviour
             model.TakeDamage(GetProjectileDamage(other.gameObject));
             Destroy(other.gameObject);
         }
+
+        if (other.gameObject.CompareTag("HealthPotion"))
+        {
+            model.Heal(GetHealthPotionHeal(other.gameObject));
+            Destroy(other.gameObject);
+        }
     }
 
     private float GetProjectileDamage(GameObject otherGameObject)
     {
-        Projectile projectileScript = otherGameObject.GetComponent(typeof(Projectile)) as Projectile;
+        Projectile projectileScript = otherGameObject
+            .GetComponent(typeof(Projectile)) as Projectile;
         return projectileScript.GetDamage();
+    }
+
+    private float GetHealthPotionHeal(GameObject otherGameObject)
+    {
+        HealthPotion healthPotionScript = otherGameObject
+            .GetComponent(typeof(HealthPotion)) as HealthPotion;
+        return healthPotionScript.GetHeal();
     }
 
     private void TriggerGameOver()
