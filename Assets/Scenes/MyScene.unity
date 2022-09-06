@@ -589,6 +589,7 @@ MonoBehaviour:
   - {fileID: 8338940500265154174, guid: f9a6d03a6bd37486e8297aa111339801, type: 3}
   - {fileID: 697571848078583901, guid: 3880f57bf2cf94ae69cebfa581404913, type: 3}
   - {fileID: 697571848078583901, guid: 3880f57bf2cf94ae69cebfa581404913, type: 3}
+  healthPotion: {fileID: 2302991406917818009, guid: 4e8600fbf899541bea42d30d01c6c6a0, type: 3}
 --- !u!1 &422433631
 GameObject:
   m_ObjectHideFlags: 0
@@ -788,7 +789,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -91.57092, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

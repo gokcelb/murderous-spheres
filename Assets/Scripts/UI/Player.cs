@@ -36,7 +36,6 @@ public class Player : MonoBehaviour
         if (other.gameObject.CompareTag("HealthPotion"))
         {
             model.Heal(GetHealthPotionHeal(other.gameObject));
-            Destroy(other.gameObject);
         }
     }
 
