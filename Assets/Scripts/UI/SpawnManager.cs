@@ -8,6 +8,8 @@ public class SpawnManager : MonoBehaviour
     public GameObject[] enemiesSecondPhase; // one easy, two normal, one hard
     public GameObject[] enemiesThirdPhase; // one normal, two hard
     public GameObject healthPotion;
+    public AudioClip healthPotionSpawnSound;
+    public new AudioSource audio;
 
     private float initTime;
 
@@ -17,6 +19,7 @@ public class SpawnManager : MonoBehaviour
     private void Start()
     {
         initTime = Time.time;
+        audio = GetComponent<AudioSource>();
 
         enemySpawner = new Models.EnemySpawner();
         InvokeRepeating(
@@ -63,6 +66,7 @@ public class SpawnManager : MonoBehaviour
         if (valid)
         {
             Instantiate(healthPotion, pos, healthPotion.transform.rotation);
+            audio.PlayOneShot(healthPotionSpawnSound, 0.5F);
         }
         else
         {

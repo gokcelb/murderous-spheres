@@ -26,14 +26,14 @@ namespace Models
         public EnemySpawner()
         {
             spawnStart = 1f;
-            spawnInterval = 2f;
+            spawnInterval = 3f;
 
             fixedVerticalPos = 3f;
             overlapCheckRadius = 2.5f;
             topRange = 20f;
             bottomRange = 0f;
-            rightRange = 15f;
-            leftRange = -15f;
+            rightRange = 12f;
+            leftRange = -12f;
 
             firstPhaseDuration = 5f;
             secondPhaseDuration = 10f;
@@ -45,14 +45,14 @@ namespace Models
         public HealthPotionSpawner()
         {
             spawnStart = 5f;
-            spawnInterval = 5f;
+            spawnInterval = 7f;
 
             fixedVerticalPos = 2f;
             overlapCheckRadius = 1f;
             topRange = 0f;
             bottomRange = -20f;
-            rightRange = 15f;
-            leftRange = -15f;
+            rightRange = 12f;
+            leftRange = -12f;
         }
     }
 }

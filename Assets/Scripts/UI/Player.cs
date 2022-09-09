@@ -6,11 +6,14 @@ using TMPro;
 public class Player : MonoBehaviour
 {
     public TextMeshProUGUI health;
+    public AudioClip healSound;
+    public new AudioSource audio;
     private Models.Player model;
 
     private void Awake()
     {
         model = new  Models.Player();
+        audio = GetComponent<AudioSource>();
         health.text = "Health: " + model.Health;
     }
 
@@ -36,6 +39,7 @@ public class Player : MonoBehaviour
         if (other.gameObject.CompareTag("HealthPotion"))
         {
             model.Heal(GetHealthPotionHeal(other.gameObject));
+            audio.PlayOneShot(healSound, 0.5F);
         }
     }
 

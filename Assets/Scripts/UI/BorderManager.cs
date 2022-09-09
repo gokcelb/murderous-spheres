@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BorderManager : MonoBehaviour
 {
-    private const float horizontalBorder = 15.0f;
+    private const float horizontalBorder = 18.0f;
     private const float bottomBorder = -30.0f;
     private const float topBorder = 20.0f;
 

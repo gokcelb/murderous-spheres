@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public GameObject projectile;
 
-    private const float speed = 15.0f;
+    private const float speed = 20f;
 
     private float horizontalInput;
     private float verticalInput;

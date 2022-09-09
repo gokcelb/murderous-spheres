@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class HealthPotion : MonoBehaviour
 {
-    public AudioSource healSound;
     Models.HealthPotion model;
 
     private void Start()
     {
         model = new Models.HealthPotion();
-        healSound = GetComponent<AudioSource>();
     }
 
     public float GetHeal()
@@ -22,8 +20,7 @@ public class HealthPotion : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            healSound.Play();
-            Destroy(gameObject, healSound.clip.length);
+            Destroy(gameObject);
         }
     }
 }
