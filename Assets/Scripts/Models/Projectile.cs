@@ -26,7 +26,7 @@ namespace Models
 	{
 		public ProjectileEnemyNormal()
 		{
-			Damage = 100f;
+			Damage = 150f;
 		}
 	}
 
@@ -34,7 +34,7 @@ namespace Models
 	{
 		public ProjectileEnemyHard()
 		{
-			Damage = 150f;
+			Damage = 300;
 		}
 	}
 
