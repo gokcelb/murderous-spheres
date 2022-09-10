@@ -30,7 +30,7 @@ namespace Models
 	{
 		public EnemyEasy()
 		{
-			Health = 100f;
+			Health = 150f;
 		}
 	}
 
@@ -38,7 +38,7 @@ namespace Models
 	{
 		public EnemyNormal()
 		{
-			Health = 200f;
+			Health = 300f;
 		}
 	}
 
