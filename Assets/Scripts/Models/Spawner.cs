@@ -45,7 +45,7 @@ namespace Models
         public HealthPotionSpawner()
         {
             spawnStart = 5f;
-            spawnInterval = 7f;
+            spawnInterval = 10f;
 
             fixedVerticalPos = 2f;
             overlapCheckRadius = 1f;
