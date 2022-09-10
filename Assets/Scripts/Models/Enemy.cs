@@ -2,20 +2,51 @@
 
 namespace Models
 {
-	public class Enemy
-	{
-		public float Health { get; private set; }
-		public float ShootingSpeed { get; private set; }
+	public enum EnemyDifficulty
+    {
+        Easy,
+        Normal,
+        Hard
+    }
 
-		public Enemy(float health, float shootingSpeed)
-        {
-			Health = health;
-			ShootingSpeed = shootingSpeed;
-        }
+  	public abstract class Enemy
+  	{
+		protected float _shootingSpeed = 1f;
+
+		public float ShootingSpeed
+		{
+			get => _shootingSpeed;
+		}
+
+    	public float Health { get; protected set; }
 
 		public void TakeDamage(float damage)
-        {
+		{
 			Health -= damage;
-        }
+		}
+  	}
+
+	public class EnemyEasy : Enemy
+	{
+		public EnemyEasy()
+		{
+			Health = 100f;
+		}
+	}
+
+	public class EnemyNormal : Enemy
+	{
+		public EnemyNormal()
+		{
+			Health = 200f;
+		}
+	}
+
+	public class EnemyHard : Enemy
+	{
+		public EnemyHard()
+		{
+			Health = 300f;
+		}
 	}
 }
