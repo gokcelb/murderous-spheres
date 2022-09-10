@@ -21,10 +21,10 @@ public class Projectile : MonoBehaviour
     {
         Models.Projectile projectile = PrefabUtility.GetOriginalPrefabName(gameObject.name) switch
         {
-            "EnemyEasyProjectile" => new Factories.EnemyEasyProjectile().Create(),
-            "EnemyNormalProjectile" => new Factories.EnemyNormalProjectile().Create(),
-            "EnemyHardProjectile" => new Factories.EnemyHardProjectile().Create(),
-            _ => new Factories.PlayerProjectile().Create(),
+            "EnemyEasyProjectile" => new Models.ProjectileEnemyEasy(),
+            "EnemyNormalProjectile" => new Models.ProjectileEnemyNormal(),
+            "EnemyHardProjectile" => new Models.ProjectileEnemyHard(),
+            _ => new Models.ProjectilePlayer(),
         };
         return projectile;
     }

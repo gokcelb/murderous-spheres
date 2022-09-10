@@ -46,9 +46,9 @@ public class Enemy : MonoBehaviour
     {
         Models.Enemy enemy = GetDifficulty() switch
         {
-            Models.EnemyDifficulty.Easy => new Factories.EnemyEasy().Create(),
-            Models.EnemyDifficulty.Normal => new Factories.EnemyNormal().Create(),
-            _ => new Factories.EnemyHard().Create(),
+            Models.EnemyDifficulty.Easy => new Models.EnemyEasy(),
+            Models.EnemyDifficulty.Normal => new Models.EnemyNormal(),
+            _ => new Models.EnemyHard(),
         };
         return enemy;
     }

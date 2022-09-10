@@ -2,13 +2,6 @@
 
 namespace Models
 {
-    public enum EnemyDifficulty
-    {
-        Easy,
-        Normal,
-        Hard
-    }
-
     public static class Score
     {
         public static int TotalKills { get; private set; }

@@ -2,15 +2,47 @@
 
 namespace Models
 {
-	public class Projectile
+	public abstract class Projectile
 	{
-		public float Damage { get; }
-		public float Speed { get; }
+		protected float _speed = 30f;
 
-		public Projectile(float damage, float speed)
+		public float Speed
 		{
-			Damage = damage;
-			Speed = speed;
+			get => _speed;
+		}
+
+		public float Damage { get; protected set; }
+	}
+
+	public class ProjectileEnemyEasy : Projectile
+	{
+		public ProjectileEnemyEasy()
+		{
+			Damage = 50f;
+		}
+	}
+
+	public class ProjectileEnemyNormal : Projectile
+	{
+		public ProjectileEnemyNormal()
+		{
+			Damage = 100f;
+		}
+	}
+
+	public class ProjectileEnemyHard : Projectile
+	{
+		public ProjectileEnemyHard()
+		{
+			Damage = 150f;
+		}
+	}
+
+	public class ProjectilePlayer : Projectile
+	{
+		public ProjectilePlayer()
+		{
+			Damage = 100f;
 		}
 	}
 }
